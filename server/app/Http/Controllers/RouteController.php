@@ -9,7 +9,7 @@ use Throwable;
 class RouteController extends Controller
 {
 
-    public function __construct(private RouteService $service)
+    public function __construct(private readonly RouteService $service)
     {
     }
 
