@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1'], function () {
     Route::group(['prefix' => 'routes'], function () {
         Route::get('/', [RouteController::class, 'index']);
-        Route::delete('{destination}', [RouteController::class, 'delete']);
-        Route::post('{destination}', [RouteController::class, 'statusChange']);
+        Route::delete('/', [RouteController::class, 'delete']);
+        Route::post('/', [RouteController::class, 'statusChange']);
     });
 });

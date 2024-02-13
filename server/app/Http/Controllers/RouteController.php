@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RouteStatusChangeRequest;
 use App\Services\RouteService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Throwable;
 
 class RouteController extends Controller
@@ -20,8 +21,10 @@ class RouteController extends Controller
         ]);
     }
 
-    public function delete(string $destination): JsonResponse
+    public function delete(Request $request): JsonResponse
     {
+        $destination = $request->query('destination');
+
         try {
             $this->service->delete($destination);
 
@@ -33,8 +36,9 @@ class RouteController extends Controller
         }
     }
 
-    public function statusChange(string $destination, RouteStatusChangeRequest $request): JsonResponse
+    public function statusChange(RouteStatusChangeRequest $request): JsonResponse
     {
+        $destination = $request->query('destination');
         try {
             if ($request->get('enabled') === true) {
                 $this->service->enable($destination);

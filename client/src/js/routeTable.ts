@@ -100,7 +100,7 @@ export class RouteTable {
         console.log(`Switch status for route ${item.destination} into ${status}`);
 
         try {
-            const request: Response = await fetch(`${this.url}/${item.destination}`, {
+            const request: Response = await fetch(`${this.url}?destination=${encodeURIComponent(item.destination)}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -120,9 +120,9 @@ export class RouteTable {
 
     private async deleteRoute(item: Route): Promise<void> {
         console.log(`Delete route ${item.destination}`);
-        
+
         try {
-            const request: Response = await fetch(`${this.url}/${item.destination}`, {
+            const request: Response = await fetch(`${this.url}?destination=${encodeURIComponent(item.destination)}`, {
                 method: 'DELETE'
             });
 
