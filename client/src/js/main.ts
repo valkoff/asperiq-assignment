@@ -9,11 +9,11 @@ import { RouteTable } from './routeTable'
 
 document.addEventListener('DOMContentLoaded', async function() {
 
-    const routeTable: RouteTable = new RouteTable();
     const tableBody: HTMLElement | null = document.getElementById('data-rows');
     if(!tableBody) {
         throw new Error('Could not find the table body');
     }
-    await routeTable.loadTable(tableBody);
+    const routeTable: RouteTable = new RouteTable(tableBody);
+    await routeTable.loadTable();
 
 });
