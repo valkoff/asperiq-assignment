@@ -16,6 +16,7 @@ class RouteController extends Controller
 
     public function index(): JsonResponse
     {
+        sleep(rand(1, 3));
         return new JsonResponse([
             'data' => $this->service->getAll(),
         ]);
@@ -23,6 +24,7 @@ class RouteController extends Controller
 
     public function delete(Request $request): JsonResponse
     {
+        sleep(rand(1, 3));
         $destination = $request->query('destination');
 
         try {
@@ -38,6 +40,7 @@ class RouteController extends Controller
 
     public function statusChange(RouteStatusChangeRequest $request): JsonResponse
     {
+        sleep(rand(1, 3));
         $destination = $request->query('destination');
         try {
             if ($request->get('enabled') === true) {
