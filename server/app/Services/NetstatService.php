@@ -6,38 +6,14 @@ use App\Classes\Route;
 
 class NetstatService
 {
-
     /**
      * @return array<Route>
      */
     public function getRoutes(): array
     {
         $output = $this->execute();
+
         return $this->parseOutput($output);
-    }
-
-    private function execute(): array
-    {
-        exec('netstat -rn', $output);
-        return $output;
-    }
-
-    private function parseOutput(array $output): array
-    {
-        $routes = [];
-        foreach ($output as $i => $row) {
-            if ($i <= 1) {
-                continue;
-            }
-            $routes[] = $this->parseRow($row);
-        }
-        return $routes;
-    }
-
-    private function parseRow(string $row): Route
-    {
-        $parts = preg_split('/\s+/', $row);
-        return new Route($parts[0], $parts[1], $parts[3], $parts[7]);
     }
 
     /**
@@ -56,4 +32,30 @@ class NetstatService
         ];
     }
 
+    private function execute(): array
+    {
+        exec('netstat -rn', $output);
+
+        return $output;
+    }
+
+    private function parseOutput(array $output): array
+    {
+        $routes = [];
+        foreach ($output as $i => $row) {
+            if ($i <= 1) {
+                continue;
+            }
+            $routes[] = $this->parseRow($row);
+        }
+
+        return $routes;
+    }
+
+    private function parseRow(string $row): Route
+    {
+        $parts = preg_split('/\s+/', $row);
+
+        return new Route($parts[0], $parts[1], $parts[3], $parts[7]);
+    }
 }

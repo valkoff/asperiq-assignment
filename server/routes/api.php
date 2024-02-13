@@ -23,6 +23,6 @@ Route::group(['prefix' => 'v1'], function () {
     Route::group(['prefix' => 'routes'], function () {
         Route::get('/', [RouteController::class, 'index']);
         Route::delete('{destination}', [RouteController::class, 'delete']);
-        Route::post('{destination}', [RouteController::class, 'statusChange']);
+        Route::post('{destination}/disable', [RouteController::class, 'disable']);
     });
 });
