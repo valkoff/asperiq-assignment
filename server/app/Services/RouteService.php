@@ -6,7 +6,6 @@ use Exception;
 
 readonly class RouteService
 {
-
     public function __construct(private NetstatService $netstat)
     {
     }
@@ -22,6 +21,7 @@ readonly class RouteService
     public function delete(string $destination): true
     {
         throw_if(!$this->canDeleteRoute($destination), new Exception('Route cannot be deleted'));
+
         /**
          * @todo Implement the actual deletion of the route
          */
@@ -29,10 +29,8 @@ readonly class RouteService
     }
 
     /**
-     * @param  string  $destination
-     *
      * @return bool
-     * Mocks the actual check if the route can be deleted
+     *              Mocks the actual check if the route can be deleted
      */
     private function canDeleteRoute(string $destination): bool
     {
@@ -45,6 +43,7 @@ readonly class RouteService
     public function disable(string $destination): true
     {
         throw_if(!$this->canDisableRoute($destination), new Exception('Route cannot be disabled'));
+
         /**
          * @todo Implement the actual disabling of the route
          */
@@ -52,10 +51,8 @@ readonly class RouteService
     }
 
     /**
-     * @param  string  $destination
-     *
      * @return bool
-     * Mocks the actual check if the route can be disabled
+     *              Mocks the actual check if the route can be disabled
      */
     private function canDisableRoute(string $destination): bool
     {
@@ -68,6 +65,7 @@ readonly class RouteService
     public function enable(string $destination): true
     {
         throw_if(!$this->canEnableRoute($destination), new Exception('Route cannot be enabled'));
+
         /**
          * @todo Implement the actual enabling of the route
          */
@@ -75,10 +73,8 @@ readonly class RouteService
     }
 
     /**
-     * @param  string  $destination
-     *
      * @return bool
-     * Mocks the actual check if the route can be disabled
+     *              Mocks the actual check if the route can be disabled
      */
     private function canEnableRoute(string $destination): bool
     {

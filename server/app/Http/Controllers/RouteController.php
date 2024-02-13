@@ -9,7 +9,6 @@ use Throwable;
 
 class RouteController extends Controller
 {
-
     public function __construct(private readonly RouteService $service)
     {
     }
@@ -25,6 +24,7 @@ class RouteController extends Controller
     {
         try {
             $this->service->delete($destination);
+
             return new JsonResponse([], 204);
         } catch (Throwable $e) {
             return new JsonResponse([
@@ -41,6 +41,7 @@ class RouteController extends Controller
             } else {
                 $this->service->disable($destination);
             }
+
             return new JsonResponse([], 204);
         } catch (Throwable $e) {
             return new JsonResponse([
