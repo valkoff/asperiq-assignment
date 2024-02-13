@@ -76,10 +76,31 @@ export class RouteTable {
         const deleteButton: HTMLButtonElement = document.createElement('button');
         deleteButton.setAttribute('type', 'button');
         deleteButton.setAttribute('class', 'btn btn-sm btn-danger');
-        deleteButton.innerHTML = '<i class="bi bi-trash"></i>';
+
+        // Create the spinner
+        const spinner: HTMLSpanElement = document.createElement('span');
+        spinner.setAttribute('class', 'spinner-border spinner-border-sm');
+        spinner.setAttribute('role', 'status');
+        spinner.setAttribute('aria-hidden', 'true');
+        spinner.style.display = 'none';
+
+        // Create the trash icon
+        const icon: HTMLElement = document.createElement('i');
+        icon.setAttribute('class', 'bi bi-trash');
+
+        // Add the icon and the spinner to the delete button
+        deleteButton.appendChild(icon);
+        deleteButton.appendChild(spinner);
 
         // Add event listener to the delete button
-        deleteButton.addEventListener('click', () => this.deleteRoute(item));
+        deleteButton.addEventListener('click', async () => {
+            // Enable loading state
+            deleteButton.disabled = true;
+            spinner.style.display = 'inline-block';
+            icon.style.display = 'none';
+
+            await this.deleteRoute(item);
+        });
 
         return deleteButton;
     }
