@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RouteStatusChangeRequest;
 use App\Services\RouteService;
 use Illuminate\Http\JsonResponse;
 use Throwable;
@@ -32,10 +33,14 @@ class RouteController extends Controller
         }
     }
 
-    public function disable(string $destination): JsonResponse
+    public function statusChange(string $destination, RouteStatusChangeRequest $request): JsonResponse
     {
         try {
-            $this->service->disable($destination);
+            if ($request->get('enabled') === true) {
+                $this->service->enable($destination);
+            } else {
+                $this->service->disable($destination);
+            }
 
             return new JsonResponse([], 204);
         } catch (Throwable $e) {

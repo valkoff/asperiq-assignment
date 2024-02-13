@@ -58,4 +58,26 @@ readonly class RouteService
     {
         return $destination !== '';
     }
+
+    /**
+     * @throws \Throwable
+     */
+    public function enable(string $destination): true
+    {
+        throw_if(! $this->canEnableRoute($destination), new Exception('Route cannot be enabled'));
+
+        /**
+         * @todo Implement the actual enabling of the route
+         */
+        return true;
+    }
+
+    /**
+     * @return bool
+     *              Mocks the actual check if the route can be disabled
+     */
+    private function canEnableRoute(string $destination): bool
+    {
+        return $destination !== '';
+    }
 }
