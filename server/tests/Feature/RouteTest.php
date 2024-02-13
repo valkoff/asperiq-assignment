@@ -1,6 +1,6 @@
 <?php
 
-it('should return a list of routes', function () {
+it('can return a list of routes', function () {
     $response = $this->get('/api/v1/routes');
     $response->assertStatus(200);
     $response->assertJson([
@@ -16,12 +16,21 @@ it('should return a list of routes', function () {
     ]);
 });
 
-it('should delete a route', function () {
-    $response = $this->delete('/api/v1/routes/1');
+it('can delete a route', function () {
+    $response = $this->delete('/api/v1/routes/127.0.0.1');
     $response->assertStatus(204);
 });
 
-it('should disable a route', function () {
-    $response = $this->post('/api/v1/routes/2/disable');
+it('can disable a route', function () {
+    $response = $this->post('/api/v1/routes/127.0.0.1', [
+        'enabled' => false,
+    ]);
+    $response->assertStatus(204);
+});
+
+it('can enable a route', function () {
+    $response = $this->post('/api/v1/routes/127.0.0.1', [
+        'enabled' => true,
+    ]);
     $response->assertStatus(204);
 });
